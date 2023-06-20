@@ -1,0 +1,85 @@
+Final Keyword (similar to const in javascript)
+- Can be used when declaring a field to prevent it from being overwritten
+- Final strings/primitives cannot be changed at all
+- Final arrays, collections, methods, etc. allow changes only to the data stored inside them
+
+// Book class
+private final String bookId; // value assigned in constructor
+String getBookId() { return book Id }
+System.out.println(book1.getBOokId());
+
+Instance vs Static
+- Values can be stored at class level
+- It is sometimes really useful to have a static field where a single value is stored for entire class
+- Unsure when a method should be static? If it relies on instance field values, it should be an instance method
+- STATIC fields and methods can be referenced using the class name
+    - no "this."
+    - Use static keyword for class-level data
+    - if you see static keyword, use class name to access
+- NON-STATIC fields and methods must be accessed through an instance (object)
+
+// Book class
+static final String[] allFormats = {"paperback", "hardcover", "digital"};
+        stored value at class level prevents changes
+
+// Main class
+String[] bookFormats = Book.allFormats;
+        reference using class name (Book.)
+
+Constants
+- Universal values
+- A true constant has the same value across all objects of a class (but there is no constant keyword in Java)
+- static keyword ensures the value is stored at class level
+- final keyword ensures value cannot be changed
+- Constants should always be referenced using the class name and not an object of the class
+- use uppercase
+
+
+
+Special Methods
+- toString()
+    - By default, Java gives each class toString() method
+    - Test by printing an object of that class to the console
+    - Not friendly because just points to objects location memory
+    - You can explicitly call toString() on an object but you don't have to
+    - Often helpful to customize the toString() method so it will print what you want (formatted how you want)
+    - Annotation @Override is not always required but recommended
+
+public String toString() {
+return *custom string*
+}
+
+- equals()
+    - By default, Java gives each class an equals() method
+    - Oddly enough, it actually checks identity by comparing the objects' locations in memory, making it no better
+    than using the == operator
+    - To actually compare equality using the contents of the objects of the class, it is helpful to customize
+    the equals() method
+
+Example:
+1. System.out.println("Are the two libraries identical?");
+1. System.out.println(library = library2);
+
+2. System.out.println("Are the two libraries identical?");
+2. System.out.println(library.equals(library2));
+
+OUTPUT:
+1. false
+2. true
+
+Typing the argument of equals()
+    - The equals() method should have an argument toBeCompared of the generic Object type
+    - Then inside the method you use parens to cast the class to the original argument and tore it in a new variable
+ Example:
+
+ public boolean equals(Object toBeCompared) {
+ // Cast
+ Library otherLibrary = (Library) toBeCompared;
+ }
+
+ Customizing equals()
+    - Every equals() method needs extra checks with early returns before casting to the specific class
+    and coding the custom logic
+           - Reference: same identity? Return true
+           - Null: no second object to compare? Return false
+           - Class: different class? Return false

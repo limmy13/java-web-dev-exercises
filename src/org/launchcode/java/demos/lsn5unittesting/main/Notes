@@ -1,0 +1,22 @@
+The AAA method:
+ - Arrange the variables your test requires
+ - Act on the methods your test requires
+ - Assert a comparison of the expected and actual values that will prove the code works
+
+ Example:
+ @Test
+ public void addReturnsCorrectSum() {
+ // Arrange
+ Arithmetic adder = new Arithmetic();
+ int n1 = 3;
+ int n2 = 5;
+ // Act
+ int actualSum = adder.add(n1, n2);
+ // Assert
+ assertEquals(expectedSum, actualSum);
+
+ Assertion Methods
+  - assertEquals() when you expect the two values to be equal
+  - assertTrue() when you expect a conditional expression to eval to true
+  - assertFalse() when you expect a conditional expression to eval to false
+  - assertNotNull() when you expect the value of some piece of data to be null
