@@ -1,0 +1,98 @@
+Inheritance Terminology
+ - Inheritance or subclassing
+ - Parent class aka base class aka superclass
+ - Child class aka derived class aka subclass
+
+ Java Syntax
+  - Establishing inheritance: to pass on the data (fields and properties) and behaviors (methods) of a base class to a subclass,
+  use extends keyword
+    - a subclass can inherit from only ONE other class, but a subclass can also be a base class for another subclass
+
+  Example:
+  public abstract class Beverage {} // base class
+  public class Soda extends Beverage {} // subclass/baseclass
+  public class DietSoda extends Soda {} subclass of a subclass
+
+  - Constructors
+   - If you want the subclass to be able to use the base class' constructor, it will be implicitly called if it has no
+   params (default constructor)
+   - Otherwise, you must define a constructor in the subclass and then use the super keyword to call it from inside
+   the subclass' constructor and pass in whatever args are required
+
+   Example:
+
+   public Beverage (String name, int ounces, String container) {
+        this.id = nextId;
+        this.name = name;
+        this.ounces = ounces;
+        this.container = container;
+        nextId++;
+   }
+
+   public Soda(String name, int ounces, String container, boolean caffeinated) {
+        super(name, ounces, container);
+        this.caffeinated = caffeinated;
+   }
+
+    - Modifying behaviors
+        - Use @Override annotations : BOTH methods of the same name must have the same signature
+
+    Example:
+
+     public Soda(String name, int ounces, String container, boolean caffeinated) {
+            super(name, ounces, container);
+            this.caffeinated = caffeinated;
+       }
+
+     public boolean isCaffeinated() { return caffeinated; }
+
+     @Override
+     public String toString() {
+            String caffeineText = isCaffeinated() ? " with caffeine" : "";
+     return super.getOunces() + "-oz. " +
+            super.getContainer() + " of " +
+            super.getName() +
+            caffeineText +
+            " (ID: " + super.getId() + ")";
+     }
+Abstraction
+      - A base class can define fields and methods for subclasses to inherit but never have objects instantiated from it
+      - Use abstract keyword to designate such a base class
+      - Can also apply abstract keyword to undefined methods to ensure they are defined instead by subclasses, but only
+      inside an abstract class
+      - Does not contain implementation
+
+Testing
+ - It's a good idea to use unit tests to verify the inheritance
+
+ Diagramming Classes
+  - Using the Unified Modeling Language (UNL)
+     - Plan out a class by giving it a name, then listing fields, then methods
+     - Use + for public and - for private
+     - Underline the name if it should be static
+     - Use a colon after the name to indicate type
+     - Use italics if something is abstract
+
+
+     Example:
+
+     // NAME
+     BEVERAGE
+
+     // FIELDS
+     -nextId: int (final) // NEXT ID should be underlined
+     -name: String (final)
+     -container: String (final)
+     -recycled: boolean
+
+     // METHODS
+     + Beverage(name: String, ounces: double, container: String)
+
+     +getId(): int
+     +getName(): String
+     +getOunces(): int
+     +getContainer(): String
+     +isRecycled(): boolean
+     +setRecycled(): void
+
+     +toString(): void //toString():void would be in italics
