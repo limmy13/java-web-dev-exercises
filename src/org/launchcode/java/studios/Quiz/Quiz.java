@@ -33,7 +33,7 @@ public class Quiz {
     }
 
     public void gradeQuiz() {
-
+    System.out.println("You finished the quiz! Your score is: " + score + "/" + total);
     }
 
 

@@ -1,0 +1,76 @@
+Interfaces & Polymorphism
+
+Polymorphism:
+Different objects, same behaviors
+ - Sometimes you have objects of different classes but they have some common behaviors
+ - Polymorphism is the idea that you can use objects of different kinds in the same way
+ - You can achieve polymorphism with class inheritance through casting
+ - Interfaces offer set behaviors regardless of class
+
+ Casting with Classes
+ Parent Class Type, Child Class Instantiation
+  - It is possible to instantiate objects of a subclass but give them the base class as a type
+  - But then, in order to access the subclass' implementation of a method, you have to use casting
+
+ EX:
+ Book fahrenheit451 = new UsedBook ( . . . );
+ ---- base class type     -------- subclass type
+
+ String condition = fahrenheit451.getCondition(); // THIS WILL NOT WORK
+
+ String condition = ((UsedBook) fahrenheit451).getCondition(); // THIS WILL WORK
+                    --------------------------- is a cast to subclass type
+
+Interfaces
+A blueprint for Behaviors
+ - An interface is not a class and you cannot instantiate objects from an interface
+ - Instead, it just specifies a set of behaviors for a class
+ - If a class implements an interface, it must fulfill any behaviors the interface requires
+ - The interface can have:
+   - Constants (static final fields)
+   - Method signatures (abstract by default)
+   - Static methods (definition allowed, but no references to instance fields or methods)
+   - Default methods (only use in special circumstances)
+ - All interfaces fields are public by default
+
+ Syntax:
+  - While a class can extend only one base class, it can implement multiple interfaces
+  - Use the implements keyword to assign an interface to a class
+  - This ensures that the class must define all behaviors required by the interface (use @Override)
+  - Unlike an abstract class, it can be applied to multiple classes that are unrelated
+
+ public interface Discountable {
+    void applyPercentDiscount(double percent);
+ }
+
+ public class UsedBook extends Book implements Discountable {
+                                    ---------- keyword
+    // must define applyPercentDiscount with @Override
+ }
+
+ public class Merchandise extends Product implements Discountable {
+                                           ---------- keyword
+    // must define applyPercentDiscount with @Override
+ }
+
+
+                                    Abstract Class                  vs               Interface
+     keyword:                        extends                                         implements
+     limit applied to a class:        only one                                       one or more
+     fields:                         all types                               constants only (static final)
+     instance methods:                  yes                                              no
+     static methods:                    yes                                             yes
+     abstract methods:                  yes                                             yes
+     usage:  specify various behaviors for related classes thru inheritance | specify related behaviors for unrelated classes
+
+  Unit Testing with Interfaces
+   Ensure Interface is Used Correctly
+   - You don't test the interface directly
+   - You test the class that implements the interface
+   - Write tests that check the behaviors required by the interface have been defined and work as intended
+
+
+IntelliJ Generator for Implementation
+ - Once you've designated an interface for a class with the implements keyword, IntelliJ offers a
+ generator for the required methods
+ - Then all you have to do is code the body of the method to customize it for that class

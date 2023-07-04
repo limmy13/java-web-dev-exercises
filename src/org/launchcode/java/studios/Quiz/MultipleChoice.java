@@ -32,7 +32,7 @@ public class MultipleChoice extends Question {
         String userAnswer = answer.nextLine();
         int result = Integer.parseInt(userAnswer);
         if (isCorrectAnswer(result)) {
-            return 1;
+            return getPointValue();
         }
         else {
             return 0;
